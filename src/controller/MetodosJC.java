@@ -9,19 +9,19 @@ public class MetodosJC {
 	 * Elimina una carta del array de cartas del jugador
 	 * @param cartas Array de cartas del jugador
 	 */
-	public static void removeCard(Scanner teclado, Card[] cartas) {
+	public static void removeCard(Scanner teclado, Player jugador) {
 		System.out.println("¿Qué carta deseas lanzar?");
-		muestra(cartas);
+		muestra(jugador.getHand());
 		int n = teclado.nextInt();//cambiar por leeEntero
 		switch (n) {
 		case 1:
-			cartas[0] = null;
+			jugador.getHand()[0] = null;
 			break;
 		case 2:
-			cartas[1] = null;
+			jugador.getHand()[1] = null;
 			break;
 		case 3:
-			cartas[2] = null;
+			jugador.getHand()[2] = null;
 			break;
 		default:
 			break;
@@ -35,19 +35,19 @@ public class MetodosJC {
 	 * @param jugador Jugador que desea hacer la acción
 	 * @param cartas Array de cartas del jugador
 	 */
-	public static void throwCard(Scanner teclado, Player jugador, Card[] cartas) {
+	public static void throwCard(Scanner teclado, Player jugador) {
 		System.out.println("¿Qué carta deseas lanzar?");
-		muestra(cartas);
+		muestra(jugador.getHand());
 		int n = teclado.nextInt();//cambiar por leeEntero
 		switch (n) {
 		case 1:
-			checkMana(jugador, cartas[0]);
+			checkMana(jugador, jugador.getHand()[0]);
 			break;
 		case 2:
-			checkMana(jugador, cartas[1]);
+			checkMana(jugador, jugador.getHand()[1]);
 			break;
 		case 3:
-			checkMana(jugador, cartas[2]);
+			checkMana(jugador, jugador.getHand()[2]);
 			break;
 		default:
 			break;
