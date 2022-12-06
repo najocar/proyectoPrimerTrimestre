@@ -1,6 +1,9 @@
 package controller;
 import model.Card;
 import model.Player;
+import model.PlayMat;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MetodosJC {	
@@ -27,7 +30,6 @@ public class MetodosJC {
 			break;
 		}
 	}
-	
 	
 	/**
 	 * 
@@ -74,7 +76,7 @@ public class MetodosJC {
 	 * @param jugador Jugador que se quiere comparar
 	 * @param carta Carta que se quire comparar
 	 */
-	private static void checkMana(Player jugador, Card carta) {
+	public static void checkMana(Player jugador, Card carta) {
 		if (jugador.getMana() >= carta.getCost()) {
 			jugador.setMana(jugador.getMana() - carta.getCost());
 			jugador.setAttack(jugador.getAttack() + carta.getAttack());
@@ -83,6 +85,65 @@ public class MetodosJC {
 			System.out.println("No tienes maná suficiente");
 		}
 	}
+	
+	/**
+	 * 
+	 * @param jugador1
+	 * @param jugador2
+	 */
+	public static void winOrLose(Player jugador1, Player jugador2) {
+		if (jugador1.getHealt() <= 0 && jugador2.getHealt() <= 0) {
+			System.out.println("Empate");
+		}else if(jugador1.getHealt() <= 0) {
+			System.out.println("jugador 1 pierde");
+		}else if(jugador2.getHealt() <= 0) {
+			System.out.println("jugador 2 pierde");
+		}
+	}
+	
+	/**
+	 * Reseteo de valores e incremento de maná
+	 * @param jugador jugador al que se aplica mantenimiento
+	 * @param tablero parametros del tablero
+	 */
+	public static void maintenance(Player jugador, PlayMat tablero) {
+		jugador.setAttack(0);
+		jugador.setDefense(0);
+		jugador.setMana(jugador.getMana() + tablero.getIncreasedMana());
+	}
+	
+	/**
+	 * 
+	 * @param texto texto que muestra
+	 * @param min número mínimo que se puede seleccionar (Normalmente 0)
+	 * @param max número máximo que se puede seleccionar
+	 * @return Devuelve el número escrito
+	 */
+	public static int readInt(String texto, int min, int max) {
+        int result = 0;
+        boolean isInt = false;
+        Scanner teclado = new Scanner(System.in);
+        do {
+            try {
+
+                System.out.println(texto);
+                result = teclado.nextInt();
+                if(result >= min && result <= max) {
+                	isInt = true;
+                	
+                }else {
+                	System.out.println("Debes introducir un número entre " + min + " y " + max);
+                }
+
+            } catch (InputMismatchException e) {
+
+                System.out.println("ERROR debes introducir un número.");
+                teclado.nextLine();
+            }
+        } while (!isInt);
+
+        return result;
+    }
 	
 	public static void muestra(Card[] cartas) {
 		for (Card carta : cartas) {
