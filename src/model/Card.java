@@ -65,7 +65,7 @@ public class Card {
 	}
 	
 	public String toString() {
-		return "\nName: " + this.getName() + "\nCost: " + this.getCost() + "\nAttack: " + this.getAttack() + "\nDefense: " + this.getDefense();
+		return "\nName: " + this.getName() + "  |  Cost: " + this.getCost() + "  |  Attack: " + this.getAttack() + "  |  Defense: " + this.getDefense();
 	}
 	
 }

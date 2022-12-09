@@ -1,8 +1,7 @@
 package controller;
 import model.*;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import utils.*;
+import view.*;
 
 public class Functions {
 	
@@ -10,17 +9,19 @@ public class Functions {
 		do {
 			int turno = 0;
 			if (turno == 0) {
-				espace(5);
-				System.out.println("Cartas jugador 1");
+				Print.espace(10);
+				
+				Menu.showTurnPlayer1();
 				rellenaMano(jugador1, tablero);
 				removeCard(jugador1, tablero);
 				
-				espace(15);
+				Insert.pause("Has terminado el turno", 20);
 				
-				System.out.println("Cartas jugador 2");
+				Menu.showTurnPlayer2();
 				rellenaMano(jugador2, tablero);
 				removeCard(jugador2, tablero);
 				
+				Insert.pause("Has terminado el turno", 20);
 			}
 			maintenance(jugador1, tablero);
 			maintenance(jugador2, tablero);
@@ -36,9 +37,8 @@ public class Functions {
 	 * @param cartas Array de cartas del jugador
 	 */
 	public static void removeCard(Player jugador, PlayMat tablero) { //quitar tablero
-		System.out.println("¿Deseas eliminar una carta?");
 		showHand(jugador.getHand());
-		int n = readInt("Elije la carta que deseas eliminar (0. si no quiers eliminar ninguna)", 0, 3);//cambiar por leeEntero
+		int n = Insert.readInt("¿Deseas eliminar una carta? \nElije la carta que deseas eliminar (0 para cancelar)", 0, 3);
 		switch (n) {
 		case 1:
 			jugador.setHand(null, 0);
@@ -46,10 +46,14 @@ public class Functions {
 			showHand(jugador.getHand());
 			break;
 		case 2:
-			jugador.getHand()[1] = null;
+			jugador.setHand(null, 1);
+			jugador.giveCard(tablero.getDeckOfCards());
+			showHand(jugador.getHand());
 			break;
 		case 3:
-			jugador.getHand()[2] = null;
+			jugador.setHand(null, 2);
+			jugador.giveCard(tablero.getDeckOfCards());
+			showHand(jugador.getHand());
 			break;
 		default:
 			break;
@@ -62,10 +66,9 @@ public class Functions {
 	 * @param jugador Jugador que desea hacer la acción
 	 * @param cartas Array de cartas del jugador
 	 */
-	public static void throwCard(Scanner teclado, Player jugador) {
-		System.out.println("¿Qué carta deseas lanzar?");
+	public static void throwCard(Player jugador) {
 		showHand(jugador.getHand());
-		int n = teclado.nextInt();//cambiar por leeEntero
+		int n = Insert.readInt("¿Qué carta deseas lanzar?", 0, 0);//modificar argumentos.
 		switch (n) {
 		case 1:
 			checkMana(jugador, jugador.getHand()[0]);
@@ -94,10 +97,9 @@ public class Functions {
 			jugador1.setHealt(jugador1.getHealt()-(jugador2.getAttack() - jugador1.getDefense()));
 		}
 	}
-	
-	
+		
 	/**
-	 * compara el maná del jugador con el coste de la carta y añade su ataque y defensa al jugador
+	 * Compara el maná del jugador con el coste de la carta y añade su ataque y defensa al jugador
 	 * @param jugador Jugador que se quiere comparar
 	 * @param carta Carta que se quire comparar
 	 */
@@ -107,23 +109,24 @@ public class Functions {
 			jugador.setAttack(jugador.getAttack() + carta.getAttack());
 			jugador.setDefense(jugador.getDefense() + carta.getDefense());
 		}else {
-			System.out.println("No tienes maná suficiente");
+			Menu.showWithoutMana();
 		}
 	}
 	
 	/**
-	 * 
+	 * Metodo que comprueba si la vida de algun jugador a llegado a 0.
 	 * @param jugador1
 	 * @param jugador2
+	 * @return finish : boolean (true en caso de finalizar la partida)
 	 */
 	public static boolean winOrLose(Player jugador1, Player jugador2) {
 		boolean finish = true;
 		if (jugador1.getHealt() <= 0 && jugador2.getHealt() <= 0) {
-			System.out.println("Empate");
+			Menu.showWinOrLose(0);
 		}else if(jugador1.getHealt() <= 0) {
-			System.out.println("jugador 1 pierde");
+			Menu.showWinOrLose(1);
 		}else if(jugador2.getHealt() <= 0) {
-			System.out.println("jugador 2 pierde");
+			Menu.showWinOrLose(2);
 		}else {
 			finish = false;
 		}
@@ -142,39 +145,6 @@ public class Functions {
 	}
 	
 	/**
-	 * 
-	 * @param texto texto que muestra
-	 * @param min número mínimo que se puede seleccionar (Normalmente 0)
-	 * @param max número máximo que se puede seleccionar
-	 * @return Devuelve el número escrito
-	 */
-	public static int readInt(String texto, int min, int max) {
-        int result = 0;
-        boolean isInt = false;
-        Scanner teclado = new Scanner(System.in);
-        do {
-            try {
-
-                System.out.println(texto);
-                result = teclado.nextInt();
-                if(result >= min && result <= max) {
-                	isInt = true;
-                	
-                }else {
-                	System.out.println("Debes introducir un número entre " + min + " y " + max);
-                }
-
-            } catch (InputMismatchException e) {
-
-                System.out.println("ERROR debes introducir un número.");
-                teclado.nextLine();
-            }
-        } while (!isInt);
-
-        return result;
-    }
-	
-	/**
 	 * Muestra las cartas de la mano del jugador
 	 * @param cartas jugador.getHand()
 	 */
@@ -182,41 +152,20 @@ public class Functions {
 		for (int i = 0; i < cartas.length; i++) {
 			if (cartas[i] != null) {
 				System.out.println(i+1 + ". " + cartas[i].toString());
-				espace(1);
+				Print.espace(1);
 			}
 		}
 	}
 	
 	/**
-	 * Introduce espacios en consola
-	 * @param n número de espacios
+	 * Metodo que rellena la mano del jugador en el primer turno.
+	 * @param jugador : Objeto(Player) destino de las cartas.
+	 * @param tablero : Objeto(PlayMat) baraja utilizada.
 	 */
-	public static void espace(int n) {
-		for (int i = 0; i < n; i++) {
-			System.out.println();
-		}
-	}
-	
 	public static void rellenaMano(Player jugador, PlayMat tablero) {
 		for(int i = 0; i < 3; i++){
 			jugador.giveCard(tablero.getDeckOfCards());
 		}
-	}
-	
-	
-	
-	/**
-	 * Instrucciones del juego
-	 */
-	public static void gameRules() {
-		System.out.println("AQUI TIENES LAS NORMAS DEL JUEGO");
-		System.out.println("Este juego consiste en una batalla por turnos donde dos jugadores se enfrentaran por dejar la salud del oponente en 0 \n\nPara comenzar: ");
-		System.out.println("Se te asignara una baraja de 3 cartas de forma aleatoria.");
-		System.out.println("Podras elegir cambiar una de las cartas asignadas por otra totalmente aleatoria.");
-		System.out.println("Cada carta tiene atributos de ataque y defensa que se sumarán al ataque y defensa del jugador");
-		System.out.println("Estos serán comparados al final del turno para comprobar que jugador recibe daño.");
-		System.out.println("Ademas cada carta tendra requerirá cierta cantidad de maná para ser lanzada");
-		System.out.println("y se sumara cierta cantidad de mana al final de cada ronda(Esto depende de si juegas Clasico o Personalizado)\n\n");
 	}
 	
 	/**
@@ -226,25 +175,22 @@ public class Functions {
 	public static void menu(Player jugador1, Player jugador2, PlayMat tablero) {
 		int opc =-1;
 		
-		System.out.println("BIENVENIDO\n");
-			System.out.println(" 1.Jugar \n 2.Normas de Juego \n 0.Salir");
-			opc = readInt("ELIGE UNA OPCIÓN", 0, 2);
+			Menu.showWelcome();
+			Menu.showMainMenu();
+			opc = Insert.readInt("ELIGE UNA OPCION: ", 0, 2);
 			
 		switch(opc) {
-		
 		case 1:
 			match(jugador1, jugador2, tablero);
-			
 			break;
 		
 		case 2:
-			gameRules();
+			Menu.showGameRules();
 			menu(jugador1, jugador2, tablero);
-			
 			break;
 			
 		case 3:
-			System.out.println("Hasta la próxima");
+			Menu.showExit();
 			break;
 		}
 	}
