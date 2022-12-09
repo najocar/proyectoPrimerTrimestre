@@ -15,8 +15,8 @@ public class Player {
 	 * Constructor por default
 	 */
 	public Player() {
-		id = -1;
-		healt = 0;
+		id = 0;
+		healt = 10;
 		mana = 0;
 		attack = 0;
 		defense = 0;	
@@ -59,6 +59,9 @@ public class Player {
 	public Card[] getHand() {
 		return hand;
 	}
+	public void setHand(Card carta, int indice) {
+		this.hand[indice] = carta;
+	}
 
 	/**
 	 * Metodo countPlayer: cuenta la cantidad de objetos(player) que contiene la array players
@@ -71,6 +74,61 @@ public class Player {
 				result++;
 			}
 		}	
+		return result;
+	}
+	
+	public int giveCard(Object[] obj) {
+		int result = 0;
+		boolean flag = false;
+		if(obj!=null) {
+			
+			int i = (int)(Math.random()*10);
+			Card[] carta = (Card[]) obj;
+			int indexNull = searchNullHand();
+				
+			for(int x = carta.length; x >= 0 && !flag; x--) {
+				if(cardValidator(i)) {
+					if (searchNullHand() != -1) {
+						try {
+							this.hand[indexNull] = carta[i];
+							flag = true;
+						} catch (Exception e) {
+							System.out.println("Error: \n" + e);
+						}
+					}
+				}else {
+					if(i == 9){
+						i = 0;
+					}
+					i++;
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	public int searchNullHand() {
+		boolean flag = false;
+		int result = -1;
+		for(int i = 0;i<this.hand.length && !flag; i++) {
+			if(hand[i] == null) {
+				result = i;
+				flag=true;
+			}
+		}
+		return result;
+	}
+	
+	public boolean cardValidator(int n) {
+		boolean result = true;
+		for(int i = 0; i<this.hand.length; i++) {
+			if(this.hand[i] != null) {
+				if(n == this.hand[i].getId()) {
+					result = false;
+				}
+			}
+		}
 		return result;
 	}
 

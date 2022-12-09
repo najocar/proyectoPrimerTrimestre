@@ -5,6 +5,7 @@ public class Card {
 	 * Atributos
 	 */
 	private int id;
+	private String name;
 	private int cost; 
 	private int attack;
 	private int defense;
@@ -14,14 +15,30 @@ public class Card {
 	 */
 	public Card(){ 
 		id = -1;
+		name = "undefined";
 		cost = 0;
 		attack = 0;
 		defense = 0;
 	}
+	
+	public Card(int id, String name, int cost, int attack, int defense) {
+		this.id = id;
+		this.name = name;
+		this.cost = cost;
+		this.attack = attack;
+		this.defense = defense;
+	}
+
 
 	/*
 	 * GETTER AND SETTER
 	 */
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getId() {
 		return id;
 	}
@@ -48,7 +65,7 @@ public class Card {
 	}
 	
 	public String toString() {
-		return "\nId: " + this.getId() + "\nCost: " + this.getCost() + "\nAttack: " + this.getAttack() + "\nDefense: " + this.getDefense();
+		return "\nName: " + this.getName() + "\nCost: " + this.getCost() + "\nAttack: " + this.getAttack() + "\nDefense: " + this.getDefense();
 	}
 	
 }

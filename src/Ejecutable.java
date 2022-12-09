@@ -1,12 +1,12 @@
-import controller.Functions;
-import model.Player;
+import controller.*;
+import model.*;
 
 public class Ejecutable {
 
 	public static void main(String[] args) {
-		Player jugador1 = new Player();
-		Player jugador2 = new Player();
-		Functions.menu(jugador1, jugador2);
+		
+		Generator.generador();
+		
 
 	}
 

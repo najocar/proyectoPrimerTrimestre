@@ -15,12 +15,12 @@ public class PlayMat {
 	 * Constructor por default
 	 */
 	public PlayMat() {
-		id = -1;
+		id = 0;
 		increasedAttack = 0;
 		increasedDefense = 0;
 		increasedMana = 0;
 		
-		deckOfCards = new Card[1024];
+		deckOfCards = new Card[10];
 		players = new Player[2];
 	}
 

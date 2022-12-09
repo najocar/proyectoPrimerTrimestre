@@ -1,31 +1,33 @@
 package controller;
-import model.Card;
-import model.Player;
-import model.PlayMat;
+import model.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Functions {
 	
-	public static void match(Player jugador1, Player jugador2) {
+	public static void match(Player jugador1, Player jugador2, PlayMat tablero) {
 		do {
 			int turno = 0;
 			if (turno == 0) {
+				espace(5);
 				System.out.println("Cartas jugador 1");
-				//giveCard(jugador1);
-				removeCard(jugador1);
+				rellenaMano(jugador1, tablero);
+				removeCard(jugador1, tablero);
 				
 				espace(15);
 				
 				System.out.println("Cartas jugador 2");
-				//giveCard(jugador2);
-				removeCard(jugador2);
+				rellenaMano(jugador2, tablero);
+				removeCard(jugador2, tablero);
 				
 			}
-			maintenance(jugador1, null);
-			maintenance(jugador2, null);
-		}while(winOrLose(null, null));
+			maintenance(jugador1, tablero);
+			maintenance(jugador2, tablero);
+			
+			
+			
+		}while(!winOrLose(jugador1, jugador2));
 		
 	}
 	
@@ -33,13 +35,15 @@ public class Functions {
 	 * Elimina una carta del array de cartas del jugador
 	 * @param cartas Array de cartas del jugador
 	 */
-	public static void removeCard(Player jugador) {
+	public static void removeCard(Player jugador, PlayMat tablero) { //quitar tablero
 		System.out.println("¿Deseas eliminar una carta?");
 		showHand(jugador.getHand());
 		int n = readInt("Elije la carta que deseas eliminar (0. si no quiers eliminar ninguna)", 0, 3);//cambiar por leeEntero
 		switch (n) {
 		case 1:
-			jugador.getHand()[0] = null;
+			jugador.setHand(null, 0);
+			jugador.giveCard(tablero.getDeckOfCards());
+			showHand(jugador.getHand());
 			break;
 		case 2:
 			jugador.getHand()[1] = null;
@@ -177,7 +181,8 @@ public class Functions {
 	public static void showHand(Card[] cartas) {
 		for (int i = 0; i < cartas.length; i++) {
 			if (cartas[i] != null) {
-				System.out.println(i + ". " + cartas[i]);
+				System.out.println(i+1 + ". " + cartas[i].toString());
+				espace(1);
 			}
 		}
 	}
@@ -187,10 +192,18 @@ public class Functions {
 	 * @param n número de espacios
 	 */
 	public static void espace(int n) {
-		for (int i = 0; i <= n; i++) {
+		for (int i = 0; i < n; i++) {
 			System.out.println();
 		}
 	}
+	
+	public static void rellenaMano(Player jugador, PlayMat tablero) {
+		for(int i = 0; i < 3; i++){
+			jugador.giveCard(tablero.getDeckOfCards());
+		}
+	}
+	
+	
 	
 	/**
 	 * Instrucciones del juego
@@ -210,7 +223,7 @@ public class Functions {
 	 *Metodo que muestra el menu, compuesto de 3 opciones, el numero de la opcion es verificado por otro metodo, y seguira mostrando el menu mientras que el numero introducido 
 	 *no sea una opcion correcta.
 	 */
-	public static void menu(Player jugador1, Player jugador2) {
+	public static void menu(Player jugador1, Player jugador2, PlayMat tablero) {
 		int opc =-1;
 		
 		System.out.println("BIENVENIDO\n");
@@ -220,13 +233,13 @@ public class Functions {
 		switch(opc) {
 		
 		case 1:
-			match(jugador1, jugador2);
+			match(jugador1, jugador2, tablero);
 			
 			break;
 		
 		case 2:
 			gameRules();
-			menu(jugador1, jugador2);
+			menu(jugador1, jugador2, tablero);
 			
 			break;
 			
