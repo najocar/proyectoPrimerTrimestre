@@ -18,7 +18,7 @@ public class PlayMat {
 		id = 0;
 		increasedAttack = 0;
 		increasedDefense = 0;
-		increasedMana = 0;
+		increasedMana = 2;
 		
 		deckOfCards = new Card[10];
 		players = new Player[2];

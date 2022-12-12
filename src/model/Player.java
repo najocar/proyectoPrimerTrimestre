@@ -16,7 +16,7 @@ public class Player {
 	 */
 	public Player() {
 		id = 0;
-		healt = 0;
+		healt = 10;
 		mana = 0;
 		attack = 0;
 		defense = 0;	
@@ -62,6 +62,10 @@ public class Player {
 	public void setHand(Card carta, int indice) {
 		this.hand[indice] = carta;
 	}
+	
+	public String toString() {
+		return "Salud: " + this.getHealt() + "  |  Maná: " + this.getMana() + "  |  Attack: " + this.getAttack() + "  |  Defense: " + this.getDefense();
+	}
 
 	/**
 	 * Metodo countPlayer: cuenta la cantidad de objetos(player) que contiene la array players
@@ -86,7 +90,7 @@ public class Player {
 		boolean flag = false;
 		if(obj!=null) {
 			
-			int i = (int)(Math.random()*10);
+			int i = (int)(Math.random()*9);
 			Card[] carta = (Card[]) obj;
 			int indexNull = searchNullHand();
 				

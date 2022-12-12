@@ -6,18 +6,18 @@ import view.*;
 public class Functions {
 	
 	public static void match(Player jugador1, Player jugador2, PlayMat tablero) {
+		int turno = 0;
 		do {
-			int turno = 0;
 			if (turno == 0) {
 				Print.espace(10);
 				
-				Menu.showTurnPlayer1();
+				Menu.showTurnPlayer1(jugador1);
 				rellenaMano(jugador1, tablero);
 				removeCard(jugador1, tablero);
 				
 				Insert.pause("Has terminado el turno", 20);
 				
-				Menu.showTurnPlayer2();
+				Menu.showTurnPlayer2(jugador2);
 				rellenaMano(jugador2, tablero);
 				removeCard(jugador2, tablero);
 				
@@ -26,7 +26,19 @@ public class Functions {
 			maintenance(jugador1, tablero);
 			maintenance(jugador2, tablero);
 			
+			do {
+				Menu.showTurnPlayer1(jugador1);
+				throwCard(jugador1);	
+			}while(!throwCard(jugador1));
 			
+			do {
+				Menu.showTurnPlayer2(jugador2);
+				throwCard(jugador2);	
+			}while(!throwCard(jugador2));
+			
+			combat(jugador1, jugador2);
+			
+			turno++;
 			
 		}while(!winOrLose(jugador1, jugador2));
 		
@@ -66,9 +78,11 @@ public class Functions {
 	 * @param jugador Jugador que desea hacer la acción
 	 * @param cartas Array de cartas del jugador
 	 */
-	public static void throwCard(Player jugador) {
+	public static boolean throwCard(Player jugador) {
+		boolean finish = false;
 		showHand(jugador.getHand());
-		int n = Insert.readInt("¿Qué carta deseas lanzar?", 0, 0);//modificar argumentos.
+		int n = Insert.readInt("¿Qué carta deseas lanzar?, 0 para pasar turno", 0, jugador.getHand().length);//modificar argumentos.
+		
 		switch (n) {
 		case 1:
 			checkMana(jugador, jugador.getHand()[0]);
@@ -80,8 +94,10 @@ public class Functions {
 			checkMana(jugador, jugador.getHand()[2]);
 			break;
 		default:
+			finish = true;
 			break;
 		}
+		return finish;
 	}
 	
 	/**
@@ -89,7 +105,9 @@ public class Functions {
 	 * @param jugador1
 	 * @param jugador2
 	 */
-	public void combat(Player jugador1, Player jugador2) {
+	public static void combat(Player jugador1, Player jugador2) {
+		Menu.showTurnPlayer1(jugador1);//cambiar por método personalizado
+		Menu.showTurnPlayer2(jugador2);//
 		if (jugador1.getAttack() > jugador2.getDefense()) {
 			jugador2.setHealt(jugador2.getHealt()-(jugador1.getAttack() - jugador2.getDefense()));
 		}
@@ -110,6 +128,7 @@ public class Functions {
 			jugador.setDefense(jugador.getDefense() + carta.getDefense());
 		}else {
 			Menu.showWithoutMana();
+			throwCard(jugador);
 		}
 	}
 	

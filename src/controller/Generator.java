@@ -16,16 +16,16 @@ public class Generator {
 		tablero.setPlayer(jugador1);
 		tablero.setPlayer(jugador2);
 		
-		Card carta1 = new Card(0, "Zombie", 2, 2, 2);
-		Card carta2 = new Card(1, "Caballero", 2, 2, 2);
-		Card carta3 = new Card(2, "Mago", 2, 2, 2);
-		Card carta4 = new Card(3, "Bola", 2, 2, 2);
-		Card carta5 = new Card(4, "Escudo", 2, 2, 2);
-		Card carta6 = new Card(5, "Flechas", 2, 2, 2);
-		Card carta7 = new Card(6, "Albaricoque", 2, 2, 2);
-		Card carta8 = new Card(7, "Rey", 2, 2, 2);
-		Card carta9 = new Card(8, "Barbaro", 2, 2, 2);
-		Card carta10 = new Card(9, "Reina", 2, 2, 2);
+		Card carta1 = new Card(0, "Bandido", 1, 1, 1);
+		Card carta2 = new Card(1, "Escudero", 3, 1, 3);
+		Card carta3 = new Card(2, "Mercenario", 2, 3, 0);
+		Card carta4 = new Card(3, "Bola de fuego", 1, 2, 0);
+		Card carta5 = new Card(4, "Escudo", 1, 0, 2);
+		Card carta6 = new Card(5, "Dragon", 3, 3, 1);
+		Card carta7 = new Card(6, "Alquimista",2, 2, 1);
+		Card carta8 = new Card(7, "Rey", 4, 4, 1);
+		Card carta9 = new Card(8, "Gigante", 4, 1, 4);
+		Card carta10 = new Card(9, "Valquiria", 3, 2, 2);
 		
 		tablero.setCard(carta1);
 		tablero.setCard(carta2);

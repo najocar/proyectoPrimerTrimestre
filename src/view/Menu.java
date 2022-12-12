@@ -1,5 +1,6 @@
 package view;
 
+import model.Player;
 import utils.*;
 
 public class Menu {
@@ -70,16 +71,18 @@ public class Menu {
 	/*
 	 * Metodo que imprime por pantalla la inicializacion del turno del jugador 1
 	 */
-	public static void showTurnPlayer1() {
+	public static void showTurnPlayer1(Player jugador) {
 		Print.p("Turno del jugador 1");
+		Print.p(jugador.toString());
 		Print.p("Cartas: ");
 	}
 	
 	/*
 	 * Metodo que imprime por pantalla la inicializacion del turno del jugador 2
 	 */
-	public static void showTurnPlayer2() {
+	public static void showTurnPlayer2(Player jugador) {
 		Print.p("Turno del jugador 2");
+		Print.p(jugador.toString());
 		Print.p("Cartas: ");
 	}
 }
