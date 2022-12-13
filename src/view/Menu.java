@@ -34,10 +34,27 @@ public class Menu {
 	}
 	
 	/**
+	 * Metodo que imprime por pantalla la informacion del combate
+	 */
+	public static void showCombat(Player jugador1, Player jugador2) {
+		Print.p("--COMBATE--");
+		Print.p("------------------------------------------------------------------|");
+		Print.p("Nombre: " + jugador1.getNombre() + "  |  Salud: " + jugador1.getHealt() + "  |  Attack: " + jugador1.getAttack() + "  |  Defense: " + jugador1.getDefense());
+;
+		Print.p("------------------------------------------------------------------|");
+		Print.p("Nombre: " + jugador2.getNombre() + "  |  Salud: " + jugador2.getHealt() + "  |  Attack: " + jugador2.getAttack() + "  |  Defense: " + jugador2.getDefense());
+		Print.p("------------------------------------------------------------------|");
+
+		
+	}
+	
+	/**
 	 * Metodo que imprime por pantalla el menu principal.
 	 */
 	public static void showMainMenu() {
-		Print.p(" 1.Jugar \n 2.Normas de Juego \n 0.Salir");
+		Print.p("-----------------------------------");
+		Print.p("| JUGAR | NORMAS DE JUEGO | SALIR |");
+		Print.p("----1------------2------------0----");
 	}
 
 	/**
@@ -68,20 +85,19 @@ public class Menu {
 		Print.p("No tienes maná suficiente");
 	}
 	
-	/*
-	 * Metodo que imprime por pantalla la inicializacion del turno del jugador 1
+	/**
+	 * Metodo showUserCard : metodo que imprime por pantalla que la carta ya ha sido utilizada en este turno
 	 */
-	public static void showTurnPlayer1(Player jugador) {
-		Print.p("Turno del jugador 1");
-		Print.p(jugador.toString());
-		Print.p("Cartas: ");
+	public static void showUserCard() {
+		Print.p("Esa carta ya la has utilizada durante este turno");
 	}
 	
-	/*
-	 * Metodo que imprime por pantalla la inicializacion del turno del jugador 2
+	/**
+	 * Metodo que imprime por pantalla la inicializacion del turno del jugador
+	 * @param jugador : Objeto de tipo player para definir el jugador utilizado en el metodo
 	 */
-	public static void showTurnPlayer2(Player jugador) {
-		Print.p("Turno del jugador 2");
+	public static void showTurnPlayer(Player jugador) {
+		Print.p("Turno del " + jugador.getNombre());
 		Print.p(jugador.toString());
 		Print.p("Cartas: ");
 	}

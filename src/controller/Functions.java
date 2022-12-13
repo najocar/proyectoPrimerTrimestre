@@ -11,13 +11,13 @@ public class Functions {
 			if (turno == 0) {
 				Print.espace(10);
 				
-				Menu.showTurnPlayer1(jugador1);
+				Menu.showTurnPlayer(jugador1);
 				rellenaMano(jugador1, tablero);
 				removeCard(jugador1, tablero);
 				
 				Insert.pause("Has terminado el turno", 20);
 				
-				Menu.showTurnPlayer2(jugador2);
+				Menu.showTurnPlayer(jugador2);
 				rellenaMano(jugador2, tablero);
 				removeCard(jugador2, tablero);
 				
@@ -27,14 +27,18 @@ public class Functions {
 			maintenance(jugador2, tablero);
 			
 			do {
-				Menu.showTurnPlayer1(jugador1);
+				Menu.showTurnPlayer(jugador1);
 				throwCard(jugador1);	
 			}while(!throwCard(jugador1));
 			
+			Insert.pause("Has terminado el turno", 20);
+			
 			do {
-				Menu.showTurnPlayer2(jugador2);
+				Menu.showTurnPlayer(jugador2);
 				throwCard(jugador2);	
 			}while(!throwCard(jugador2));
+			
+			Insert.pause("Has terminado el turno", 20);
 			
 			combat(jugador1, jugador2);
 			
@@ -106,8 +110,7 @@ public class Functions {
 	 * @param jugador2
 	 */
 	public static void combat(Player jugador1, Player jugador2) {
-		Menu.showTurnPlayer1(jugador1);//cambiar por método personalizado
-		Menu.showTurnPlayer2(jugador2);//
+		Menu.showCombat(jugador1, jugador2);
 		if (jugador1.getAttack() > jugador2.getDefense()) {
 			jugador2.setHealt(jugador2.getHealt()-(jugador1.getAttack() - jugador2.getDefense()));
 		}

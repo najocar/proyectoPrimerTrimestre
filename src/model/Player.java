@@ -5,6 +5,7 @@ public class Player {
 	 * Atributos
 	 */
 	private int id;
+	private String nombre;
 	private int healt;
 	private int mana;
 	private int attack;
@@ -14,14 +15,17 @@ public class Player {
 	/*
 	 * Constructor por default
 	 */
-	public Player() {
+	public Player(String nombre) {
 		id = 0;
+		this.nombre = nombre;
 		healt = 10;
 		mana = 0;
 		attack = 0;
 		defense = 0;	
 		hand = new Card[3];
 	}
+	
+
 
 	/*
 	 * GETTER AND SETTER
@@ -31,6 +35,12 @@ public class Player {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public int getHealt() {
 		return healt;
@@ -63,8 +73,11 @@ public class Player {
 		this.hand[indice] = carta;
 	}
 	
+	/**
+	 * Metodo toString : Metodo que sobreescribe el metodo toString
+	 */
 	public String toString() {
-		return "Salud: " + this.getHealt() + "  |  Maná: " + this.getMana() + "  |  Attack: " + this.getAttack() + "  |  Defense: " + this.getDefense();
+		return "Nombre: " + this.getNombre() + "  |  Salud: " + this.getHealt() + "  |  Maná: " + this.getMana() + "  |  Attack: " + this.getAttack() + "  |  Defense: " + this.getDefense();
 	}
 
 	/**
