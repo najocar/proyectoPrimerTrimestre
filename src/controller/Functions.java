@@ -5,6 +5,12 @@ import view.*;
 
 public class Functions {
 	
+	/**
+	 * Este método es la partida
+	 * @param jugador1 
+	 * @param jugador2
+	 * @param tablero
+	 */
 	public static void match(Player jugador1, Player jugador2, PlayMat tablero) {
 		int turno = 0;
 		do {
@@ -27,13 +33,11 @@ public class Functions {
 			maintenance(jugador2, tablero);
 			
 			do {
-				Menu.showTurnPlayer1(jugador1);
-				throwCard(jugador1);	
+				Menu.showTurnPlayer1(jugador1);	
 			}while(!throwCard(jugador1));
 			
 			do {
 				Menu.showTurnPlayer2(jugador2);
-				throwCard(jugador2);	
 			}while(!throwCard(jugador2));
 			
 			combat(jugador1, jugador2);
@@ -95,7 +99,6 @@ public class Functions {
 			break;
 		default:
 			finish = true;
-			break;
 		}
 		return finish;
 	}
@@ -122,13 +125,15 @@ public class Functions {
 	 * @param carta Carta que se quire comparar
 	 */
 	public static void checkMana(Player jugador, Card carta) {
-		if (jugador.getMana() >= carta.getCost()) {
+		if (jugador.getMana() < carta.getCost() || jugador.getMana() != carta.getCost()) {
+			Menu.showWithoutMana();
+		}else if (carta.getUsed()) {
+			Menu.showUsedCard();
+		}else {
 			jugador.setMana(jugador.getMana() - carta.getCost());
 			jugador.setAttack(jugador.getAttack() + carta.getAttack());
 			jugador.setDefense(jugador.getDefense() + carta.getDefense());
-		}else {
-			Menu.showWithoutMana();
-			throwCard(jugador);
+			carta.setUsed(true);
 		}
 	}
 	
@@ -169,7 +174,7 @@ public class Functions {
 	 */
 	public static void showHand(Card[] cartas) {
 		for (int i = 0; i < cartas.length; i++) {
-			if (cartas[i] != null) {
+			if (cartas[i] != null || !cartas[i].getUsed()) {
 				System.out.println(i+1 + ". " + cartas[i].toString());
 				Print.espace(1);
 			}
