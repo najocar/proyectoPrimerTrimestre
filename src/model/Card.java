@@ -74,7 +74,7 @@ public class Card {
 	}
 	
 	public String toString() {
-		return "\nNombre: " + this.getName() + "  |  Coste: " + this.getCost() + "  |  Ataque: " + this.getAttack() + "  |  Defensa: " + this.getDefense();
+		return "Nombre: " + this.getName() + "  |  Coste: " + this.getCost() + "  |  Ataque: " + this.getAttack() + "  |  Defensa: " + this.getDefense();
 	}
 	
 }

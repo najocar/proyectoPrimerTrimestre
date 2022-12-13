@@ -1,5 +1,6 @@
 package view;
 
+import model.Card;
 import model.Player;
 import utils.*;
 
@@ -39,9 +40,9 @@ public class Menu {
 	public static void showCombatStats(Player jugador1, Player jugador2) {
 		Print.p("--COMBATE--");
 		Print.p("------------------------------------------------------------------|");
-		Print.p("Nombre: " + jugador1.getNombre() + "  |  Salud: " + jugador1.getHealt() + "  |  Attack: " + jugador1.getAttack() + "  |  Defense: " + jugador1.getDefense());
+		Print.p(" " + jugador1.getNombre() + "  |  Salud: " + jugador1.getHealt() + "  |  Ataque: " + jugador1.getAttack() + "  |  Defensa: " + jugador1.getDefense());
 		Print.p("------------------------------------------------------------------|");
-		Print.p("Nombre: " + jugador2.getNombre() + "  |  Salud: " + jugador2.getHealt() + "  |  Attack: " + jugador2.getAttack() + "  |  Defense: " + jugador2.getDefense());
+		Print.p(" " + jugador2.getNombre() + "  |  Salud: " + jugador2.getHealt() + "  |  Ataque: " + jugador2.getAttack() + "  |  Defensa: " + jugador2.getDefense());
 		Print.p("------------------------------------------------------------------|");
 	}
 	
@@ -105,7 +106,21 @@ public class Menu {
 	 */
 	public static void showTurnPlayer(Player jugador) {
 		Print.p("Turno del " + jugador.getNombre());
-		Print.p(jugador.toString());
+		Print.p("|-----------------------------------------------------------------|");
+		Print.p(" Salud: " + jugador.getHealt() + "  |  Mana: " + jugador.getMana() + "  |  Ataque: " + jugador.getAttack() + "  |  Defensa: " + jugador.getDefense());
+		Print.p("|-----------------------------------------------------------------|");
+		Print.ph();
 		Print.p("Cartas: ");
+	}
+
+	/**
+	 * Metodo que imprime la informacion de una carta de la mano
+	 * @param carta : objeto de tipo Card del que se imprime la informacion
+	 * @param i : indice (posicion de la carta en la array)
+	 */
+	public static void showCard(Card carta, int i) {
+		Print.p("|-----------------------------------------------------------------|");
+		Print.p(" " + carta.toString());
+		Print.p("|------------------------------[ " + (i+1) + " ]------------------------------|");
 	}
 }

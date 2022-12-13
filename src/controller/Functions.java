@@ -6,7 +6,7 @@ import view.*;
 public class Functions {
 	
 	/**
-	 * Este método es la partida
+	 * Este metodo es la partida
 	 * @param jugador1 
 	 * @param jugador2
 	 * @param tablero
@@ -15,31 +15,29 @@ public class Functions {
 		int turno = 0;
 		do {
 			if (turno == 0) {
-				Print.espace(10);
+				Print.espace(20);
 				
-				Menu.showTurnPlayer(jugador1);
 				rellenaMano(jugador1, tablero);
 				removeCard(jugador1, tablero);
 				
-				Insert.pause("Has terminado el turno", 20);
+				Insert.pause("Ha terminado tu turno...", 20);
 				
-				Menu.showTurnPlayer(jugador2);
 				rellenaMano(jugador2, tablero);
 				removeCard(jugador2, tablero);
 				
-				Insert.pause("Has terminado el turno", 20);
+				Insert.pause("Ha terminado tu turno...", 20);
 			}
 			maintenance(jugador1, tablero);
 			maintenance(jugador2, tablero);
 			
 			do {
-				Menu.showTurnPlayer(jugador1);	
+	
 			}while(!throwCard(jugador1));
 			
 			Insert.pause("Has terminado el turno", 20);
 			
 			do {
-				Menu.showTurnPlayer(jugador2);
+				
 			}while(!throwCard(jugador2));
 			
 			Insert.pause("Has terminado el turno", 20);
@@ -56,9 +54,11 @@ public class Functions {
 	 * Elimina una carta del array de cartas del jugador
 	 * @param cartas Array de cartas del jugador
 	 */
-	public static void removeCard(Player jugador, PlayMat tablero) { //quitar tablero
+	public static void removeCard(Player jugador, PlayMat tablero) {
+		Menu.showTurnPlayer(jugador);
 		showHand(jugador.getHand());
 		int n = Insert.readInt("¿Deseas eliminar una carta? \nElije la carta que deseas eliminar (0 para cancelar)", 0, 3);
+		Print.espace(20);
 		switch (n) {
 		case 1:
 			jugador.setHand(null, 0);
@@ -88,6 +88,8 @@ public class Functions {
 	 */
 	public static boolean throwCard(Player jugador) {
 		boolean finish = false;
+		Print.espace(20);
+		Menu.showTurnPlayer(jugador);
 		showHand(jugador.getHand());
 		int n = Insert.readInt("¿Qué carta deseas lanzar?, 0 para pasar turno", 0, jugador.getHand().length);//modificar argumentos.
 		
@@ -121,7 +123,6 @@ public class Functions {
 			jugador2.setHealt(jugador2.getHealt()-(jugador1.getAttack() - jugador2.getDefense()));
 			attackJ1 =jugador1.getAttack() - jugador2.getDefense();
 		}
-
 		if (jugador2.getAttack() > jugador1.getDefense()) {
 			jugador1.setHealt(jugador1.getHealt()-(jugador2.getAttack() - jugador1.getDefense()));
 			attackJ2 = jugador2.getAttack() - jugador1.getDefense();
@@ -132,7 +133,7 @@ public class Functions {
 	}
 		
 	/**
-	 * Compara el maná del jugador con el coste de la carta y añade su ataque y defensa al jugador
+	 * Compara el mana del jugador con el coste de la carta y añade su ataque y defensa al jugador
 	 * @param jugador Jugador que se quiere comparar
 	 * @param carta Carta que se quire comparar
 	 */
@@ -190,7 +191,7 @@ public class Functions {
 	public static void showHand(Card[] cartas) {
 		for (int i = 0; i < cartas.length; i++) {
 			if (cartas[i] != null && !cartas[i].getUsed()) {
-				System.out.println(i+1 + ". " + cartas[i].toString());
+				Menu.showCard(cartas[i], i);
 				Print.espace(1);
 			}
 		}
@@ -224,6 +225,7 @@ public class Functions {
 			break;
 		
 		case 2:
+			Print.espace(20);
 			Menu.showGameRules();
 			menu(jugador1, jugador2, tablero);
 			break;
