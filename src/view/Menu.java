@@ -36,16 +36,23 @@ public class Menu {
 	/**
 	 * Metodo que imprime por pantalla la informacion del combate
 	 */
-	public static void showCombat(Player jugador1, Player jugador2) {
+	public static void showCombatStats(Player jugador1, Player jugador2) {
 		Print.p("--COMBATE--");
 		Print.p("------------------------------------------------------------------|");
 		Print.p("Nombre: " + jugador1.getNombre() + "  |  Salud: " + jugador1.getHealt() + "  |  Attack: " + jugador1.getAttack() + "  |  Defense: " + jugador1.getDefense());
-;
 		Print.p("------------------------------------------------------------------|");
 		Print.p("Nombre: " + jugador2.getNombre() + "  |  Salud: " + jugador2.getHealt() + "  |  Attack: " + jugador2.getAttack() + "  |  Defense: " + jugador2.getDefense());
 		Print.p("------------------------------------------------------------------|");
-
-		
+	}
+	
+	/**
+	 * Metodo showCombat : metodo que imprime por pantalla el resultado del combate (daño y vida)
+	 * @param jugador : 
+	 */
+	public static void showCombat(Player jugador, int attack) {
+		Print.p("|-----------------------------------------------------------------|");
+		Print.p(" " + jugador.getNombre() + " ha hecho " + attack + " de daño");
+		Print.p("|-----------------------------------------------------------------|");
 	}
 	
 	/**
@@ -61,7 +68,7 @@ public class Menu {
 	 * Metodo que imprime por pantalla la bienvenida del juego
 	 */
 	public static void showWelcome() {
-		Print.p("BIENVENIDO\n");
+		Print.p("--BIENVENIDO--\n");
 	}
 
 	/**
@@ -88,8 +95,8 @@ public class Menu {
 	/**
 	 * Metodo showUserCard : metodo que imprime por pantalla que la carta ya ha sido utilizada en este turno
 	 */
-	public static void showUserCard() {
-		Print.p("Esa carta ya la has utilizada durante este turno");
+	public static void showUsedCard() {
+		Print.p("Esa carta ya la has utilizado durante este turno");
 	}
 	
 	/**

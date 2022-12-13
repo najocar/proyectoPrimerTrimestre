@@ -77,7 +77,7 @@ public class Player {
 	 * Metodo toString : Metodo que sobreescribe el metodo toString
 	 */
 	public String toString() {
-		return "Nombre: " + this.getNombre() + "  |  Salud: " + this.getHealt() + "  |  Maná: " + this.getMana() + "  |  Attack: " + this.getAttack() + "  |  Defense: " + this.getDefense();
+		return "Nombre: " + this.getNombre() + "  |  Salud: " + this.getHealt() + "  |  Mana: " + this.getMana() + "  |  Ataque: " + this.getAttack() + "  |  Defensa: " + this.getDefense();
 	}
 
 	/**
