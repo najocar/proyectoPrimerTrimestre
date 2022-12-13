@@ -121,13 +121,13 @@ public class Functions {
 			jugador2.setHealt(jugador2.getHealt()-(jugador1.getAttack() - jugador2.getDefense()));
 			attackJ1 =jugador1.getAttack() - jugador2.getDefense();
 		}
-		Menu.showCombat(jugador1, attackJ1);
 
 		if (jugador2.getAttack() > jugador1.getDefense()) {
 			jugador1.setHealt(jugador1.getHealt()-(jugador2.getAttack() - jugador1.getDefense()));
 			attackJ2 = jugador2.getAttack() - jugador1.getDefense();
 		}
-		Menu.showCombat(jugador2, attackJ2);
+		Menu.showCombat(jugador1, attackJ2);
+		Menu.showCombat(jugador2, attackJ1);
 		Insert.pause("", 20);
 	}
 		

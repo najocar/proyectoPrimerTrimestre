@@ -40,7 +40,6 @@ public class Menu {
 		Print.p("--COMBATE--");
 		Print.p("------------------------------------------------------------------|");
 		Print.p("Nombre: " + jugador1.getNombre() + "  |  Salud: " + jugador1.getHealt() + "  |  Attack: " + jugador1.getAttack() + "  |  Defense: " + jugador1.getDefense());
-
 		Print.p("------------------------------------------------------------------|");
 		Print.p("Nombre: " + jugador2.getNombre() + "  |  Salud: " + jugador2.getHealt() + "  |  Attack: " + jugador2.getAttack() + "  |  Defense: " + jugador2.getDefense());
 		Print.p("------------------------------------------------------------------|");
@@ -52,7 +51,7 @@ public class Menu {
 	 */
 	public static void showCombat(Player jugador, int attack) {
 		Print.p("|-----------------------------------------------------------------|");
-		Print.p(" " + jugador.getNombre() + " ha hecho " + attack + " de daño");
+		Print.p(" " + jugador.getNombre() + " ha perdido " + attack + " de vida");
 		Print.p("|-----------------------------------------------------------------|");
 	}
 	
