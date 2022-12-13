@@ -10,8 +10,8 @@ public class Generator {
 	 */
 	public static void generador() {
 		PlayMat tablero = new PlayMat();
-		Player jugador1 = new Player();
-		Player jugador2 = new Player();
+		Player jugador1 = new Player("Jugador1");
+		Player jugador2 = new Player("Jugador2");
 		
 		tablero.setPlayer(jugador1);
 		tablero.setPlayer(jugador2);
