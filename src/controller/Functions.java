@@ -128,7 +128,7 @@ public class Functions {
 	 * @param carta Carta que se quire comparar
 	 */
 	public static void checkMana(Player jugador, Card carta) {
-		if (jugador.getMana() < carta.getCost() || jugador.getMana() != carta.getCost()) {
+		if (jugador.getMana() < carta.getCost() && jugador.getMana() != carta.getCost()) {
 			Menu.showWithoutMana();
 		}else if (carta.getUsed()) {
 			Menu.showUsedCard();
@@ -169,6 +169,9 @@ public class Functions {
 		jugador.setAttack(0);
 		jugador.setDefense(0);
 		jugador.setMana(jugador.getMana() + tablero.getIncreasedMana());
+		for (int i = 0; i < jugador.getHand().length; i++) {
+			jugador.getHand()[i].setUsed(false);
+		}
 	}
 	
 	/**
@@ -177,7 +180,7 @@ public class Functions {
 	 */
 	public static void showHand(Card[] cartas) {
 		for (int i = 0; i < cartas.length; i++) {
-			if (cartas[i] != null || !cartas[i].getUsed()) {
+			if (cartas[i] != null && !cartas[i].getUsed()) {
 				System.out.println(i+1 + ". " + cartas[i].toString());
 				Print.espace(1);
 			}
