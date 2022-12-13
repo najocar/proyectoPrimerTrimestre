@@ -28,13 +28,14 @@ public class Functions {
 				Insert.pause("Ha terminado tu turno...", 20);
 			}
 			maintenance(jugador1, tablero);
-			maintenance(jugador2, tablero);
 			
 			do {
 	
 			}while(!throwCard(jugador1));
 			
 			Insert.pause("Has terminado el turno", 20);
+			
+			maintenance(jugador2, tablero);
 			
 			do {
 				
