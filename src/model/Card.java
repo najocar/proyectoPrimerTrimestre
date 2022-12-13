@@ -1,7 +1,7 @@
 package model;
 
 public class Card {
-	/*
+	/**
 	 * Atributos
 	 */
 	private int id;
@@ -9,8 +9,9 @@ public class Card {
 	private int cost; 
 	private int attack;
 	private int defense;
+	private boolean used;
 	
-	/*
+	/**
 	 * Constructor por default
 	 */
 	public Card(){ 
@@ -19,6 +20,7 @@ public class Card {
 		cost = 0;
 		attack = 0;
 		defense = 0;
+		used = false;
 	}
 	
 	public Card(int id, String name, int cost, int attack, int defense) {
@@ -27,6 +29,7 @@ public class Card {
 		this.cost = cost;
 		this.attack = attack;
 		this.defense = defense;
+		this.used = false;
 	}
 
 
@@ -62,6 +65,12 @@ public class Card {
 	}
 	public void setDefense(int defense) {
 		this.defense = defense;
+	}
+	public boolean getUsed() {
+		return used;
+	}
+	public void setUsed(boolean used) {
+		this.used = used;
 	}
 	
 	public String toString() {
