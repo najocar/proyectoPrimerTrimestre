@@ -113,13 +113,22 @@ public class Functions {
 	 * @param jugador2
 	 */
 	public static void combat(Player jugador1, Player jugador2) {
-		Menu.showCombat(jugador1, jugador2);
+		Menu.showCombatStats(jugador1, jugador2);
+		Insert.pause("", 20);
+		int attackJ1 = 0;
+		int attackJ2 = 0;
 		if (jugador1.getAttack() > jugador2.getDefense()) {
 			jugador2.setHealt(jugador2.getHealt()-(jugador1.getAttack() - jugador2.getDefense()));
+			attackJ1 =jugador1.getAttack() - jugador2.getDefense();
 		}
+		Menu.showCombat(jugador1, attackJ1);
+
 		if (jugador2.getAttack() > jugador1.getDefense()) {
 			jugador1.setHealt(jugador1.getHealt()-(jugador2.getAttack() - jugador1.getDefense()));
+			attackJ2 = jugador2.getAttack() - jugador1.getDefense();
 		}
+		Menu.showCombat(jugador2, attackJ2);
+		Insert.pause("", 20);
 	}
 		
 	/**
