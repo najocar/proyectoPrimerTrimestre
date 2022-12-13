@@ -33,15 +33,13 @@ public class Functions {
 			maintenance(jugador2, tablero);
 			
 			do {
-				Menu.showTurnPlayer1(jugador1);	
-        main
+				Menu.showTurnPlayer(jugador1);	
 			}while(!throwCard(jugador1));
 			
 			Insert.pause("Has terminado el turno", 20);
 			
 			do {
-				Menu.showTurnPlayer2(jugador2);
-        main
+				Menu.showTurnPlayer(jugador2);
 			}while(!throwCard(jugador2));
 			
 			Insert.pause("Has terminado el turno", 20);

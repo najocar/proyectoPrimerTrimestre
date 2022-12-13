@@ -40,7 +40,7 @@ public class Menu {
 		Print.p("--COMBATE--");
 		Print.p("------------------------------------------------------------------|");
 		Print.p("Nombre: " + jugador1.getNombre() + "  |  Salud: " + jugador1.getHealt() + "  |  Attack: " + jugador1.getAttack() + "  |  Defense: " + jugador1.getDefense());
-;
+
 		Print.p("------------------------------------------------------------------|");
 		Print.p("Nombre: " + jugador2.getNombre() + "  |  Salud: " + jugador2.getHealt() + "  |  Attack: " + jugador2.getAttack() + "  |  Defense: " + jugador2.getDefense());
 		Print.p("------------------------------------------------------------------|");
@@ -88,7 +88,7 @@ public class Menu {
 	/**
 	 * Metodo showUserCard : metodo que imprime por pantalla que la carta ya ha sido utilizada en este turno
 	 */
-	public static void showUserCard() {
+	public static void showUsedCard() {
 		Print.p("Esa carta ya la has utilizada durante este turno");
 	}
 	
