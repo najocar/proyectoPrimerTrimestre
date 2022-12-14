@@ -1,6 +1,5 @@
 package controller;
 
-import controller.Functions;
 import model.*;
 
 public class Generator {
