@@ -1,5 +1,4 @@
-import controller.*;
-import model.*;
+import controller.Generator;
 
 public class Ejecutable {
 
